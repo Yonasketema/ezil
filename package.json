@@ -19,6 +19,7 @@
     "langchain": "^0.2.5",
     "openai": "^4.50.0",
     "playwright": "^1.44.1",
+    "puppeteer": "^22.11.1",
     "youtube-transcript": "^1.2.1",
     "youtubei.js": "^10.0.0"
   }

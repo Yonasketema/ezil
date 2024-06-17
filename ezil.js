@@ -1,7 +1,7 @@
 import * as p from "@clack/prompts";
 import color from "picocolors";
 
-import { ytLoader } from "./utils/loader.js";
+import { webLoader, ytLoader } from "./utils/loader.js";
 import { createVectorStore } from "./utils/store.js";
 import { openai } from "./openai.js";
 import { recursiveSplitter } from "./utils/docSplitter.js";
@@ -18,7 +18,7 @@ const dataType = await p.select({
   maxItems: 5,
   options: [
     { value: "youtube", label: "Youtube" },
-    { value: "web", label: "WebUrl" },
+    { value: "web", label: "Web" },
   ],
 });
 
@@ -45,10 +45,18 @@ if (dataType === "youtube") {
       process.exit(0);
     }
   }
+} else if (dataType === "web") {
+  try {
+    docs = await webLoader(url);
+  } catch (e) {
+    if (e) {
+      p.cancel(e);
+      process.exit(0);
+    }
+  }
 }
 
 spin.stop(`Your Data is Load`);
-
 // / split docs and store
 
 spin.start();
@@ -111,5 +119,5 @@ while (true) {
 
   spin.stop(`your answer`);
   p.outro(color.white(color.bold(response.choices[0].message.content)));
-  console.log(results.map((r) => r.metadata.source).join(","));
+  console.log([...new Set(results)].map((r) => r.metadata.source).join(","));
 }

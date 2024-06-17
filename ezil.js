@@ -4,8 +4,9 @@ import color from "picocolors";
 import { ytLoader } from "./utils/loader.js";
 import { createVectorStore } from "./utils/store.js";
 import { openai } from "./openai.js";
+import { recursiveSplitter } from "./utils/docSplitter.js";
 
-//FIXME: refactor
+//FIXME: refactor , try catch error handling, spinner
 
 p.intro(`${color.bgWhite(color.black(" Ezil "))}`);
 
@@ -33,11 +34,11 @@ const url = await p.text({
 spin.start();
 spin.message(`Loading Your Data .`);
 
-let loader;
+let docs;
 
 if (dataType === "youtube") {
   try {
-    loader = await ytLoader(url);
+    docs = await ytLoader(url);
   } catch (e) {
     if (e) {
       p.cancel(e);
@@ -48,11 +49,14 @@ if (dataType === "youtube") {
 
 spin.stop(`Your Data is Load`);
 
-// / store
+// / split docs and store
 
 spin.start();
 spin.message(`indexing and save  Your Data .`);
-const store = await createVectorStore([...loader]);
+
+const chunks = await recursiveSplitter(docs);
+
+const store = await createVectorStore(chunks);
 
 spin.stop(`index And save`);
 

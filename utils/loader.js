@@ -1,22 +1,14 @@
 import { YoutubeLoader } from "@langchain/community/document_loaders/web/youtube";
-import { CharacterTextSplitter } from "langchain/text_splitter";
-import "dotenv/config";
 
 export const ytLoader = async (url) => {
-  const loadData = YoutubeLoader.createFromUrl(url, {
+  const loader = YoutubeLoader.createFromUrl(url, {
     language: "en",
     addVideoInfo: true,
   });
 
-  const ytDocs = await loadData.loadAndSplit(
-    new CharacterTextSplitter({
-      separator: "",
-      chunkSize: 2500,
-      chunkOverlap: 100,
-    })
-  );
+  const docs = await loader.load();
 
-  return ytDocs;
+  return docs;
 };
 
 //TODO:  add web loader

@@ -2,7 +2,7 @@
 
 # Ezil CLI 
 
-javascript CLI RAG tool that simplifies web and YouTube scraping while providing robust content summarization capabilities. This powerful tool enables effortless extraction of data from websites and YouTube channels, allowing users to easily gather valuable information.
+ it's a robust JavaScript CLI RAG that's all about making your life easier. It's perfect for extracting valuable data from websites and YouTube video.
 
  
 <img width="90%" alt="ezil RAG CLI" src="https://github.com/Gion-AI/ezil/blob/main/2024-06-18%2010-47.gif">

@@ -1,5 +1,3 @@
-// FIXME: refactor doc splitter
-
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 export const recursiveSplitter = async (docs) => {

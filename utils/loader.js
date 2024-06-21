@@ -19,6 +19,3 @@ export const webLoader = async (url) => {
 
   return docs;
 };
-
-//TODO:  add web loader
-// FIXME: language , reactor: doc splitter

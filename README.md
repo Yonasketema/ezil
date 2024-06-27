@@ -8,11 +8,6 @@ it's a robust JavaScript CLI RAG that's all about making your life easier. It's 
 
 </div>
 
-## ✨ Features
-
--
--
-
 ## ⚡️ Quick start
 
 > [!IMPORTANT]
